@@ -13,17 +13,14 @@
         <!-- ================ CAMUNDA VERSIONS ================ -->
 
         <!-- Community Edition -->
-        <camunda.version>7.13.0</camunda.version>
+        <camunda.version>7.15.0</camunda.version>
 
         <!-- Enterprise Edition -->
-        <!--        <camunda.version>7.13.0-ee</camunda.version>-->
-
-        <camunda.spring-boot.version>7.13.0</camunda.spring-boot.version>
+        <!--        <camunda.version>7.15.0-ee</camunda.version>-->
 
         <!-- ============== SPRING BOOT VERSIONS ============== -->
 
-        <!-- 7.12 and above -->
-        <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
+        <spring-boot.version>2.5.4</spring-boot.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -31,8 +28,7 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <azure.version>2.3.0</azure.version>
-
+        <azure.version>3.8.0</azure.version>
     </properties>
 
     <dependencyManagement>
@@ -52,17 +48,11 @@
                 <type>pom</type>
             </dependency>
             <dependency>
-                <groupId>com.microsoft.azure</groupId>
+                <groupId>com.azure.spring</groupId>
                 <artifactId>azure-spring-boot-bom</artifactId>
                 <version>${azure.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>2.3</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -74,7 +64,6 @@
         <dependency>
             <groupId>org.camunda.bpm.springboot</groupId>
             <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-            <version>${camunda.spring-boot.version}</version>
         </dependency>
 
         <!-- ================ general - data ================ -->
@@ -84,68 +73,29 @@
         <!--            <artifactId>h2</artifactId>-->
         <!--        </dependency>-->
         <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>2.2.3</version>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.12</version>
         </dependency>
 
         <!-- ================ spring boot ================ -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-            <version>${spring-boot.version}</version>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
-        <!-- ================ spring security ================ -->
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-client</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-jose</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-resource-server</artifactId>
-        </dependency>
-
 
         <!-- ================ microsoft azure ================ -->
 
+        <!-- https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/spring/azure-spring-boot-starter-active-directory#accessing-a-resource-server -->
         <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-active-directory-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>msal4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-spring-boot</artifactId>
-            <version>${azure.version}</version>
+            <groupId>com.azure.spring</groupId>
+            <artifactId>azure-spring-boot-starter-active-directory</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/net.minidev/json-smart -->
-        <dependency>
-            <groupId>net.minidev</groupId>
-            <artifactId>json-smart</artifactId>
-            <version>2.3</version>
-        </dependency>
     </dependencies>
 
     <build>

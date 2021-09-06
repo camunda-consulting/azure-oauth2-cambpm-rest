@@ -5,7 +5,7 @@ import org.camunda.bpm.engine.rest.util.EngineUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -29,14 +29,14 @@ public class RestAuthenticationFilter implements Filter {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
 
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails) principal).getUsername();
+        if (principal instanceof OAuth2AuthenticatedPrincipal) {
+            username = ((OAuth2AuthenticatedPrincipal) principal).getName();
         } else {
             username = principal.toString();
         }
 
         try {
-            engine.getIdentityService().setAuthentication(username, getUserGroups(username));
+            engine.getIdentityService().setAuthentication(username, getUserGroups());
             chain.doFilter(request, response);
         } finally {
             clearAuthentication(engine);
@@ -53,7 +53,7 @@ public class RestAuthenticationFilter implements Filter {
         engine.getIdentityService().clearAuthentication();
     }
 
-    private List<String> getUserGroups(String userId) {
+    private List<String> getUserGroups() {
 
         logger.info("++ RestAuthenticationFilter.getUserGroups()....");
 
@@ -65,7 +65,7 @@ public class RestAuthenticationFilter implements Filter {
                 .map(res -> res.getAuthority())
                 .map(res -> res.substring(5)) // Strip "ROLE_"
                 .collect(Collectors.toList());
-        logger.debug("++ groupIds = " + groupIds.toString());
+        logger.debug("++ groupIds = " + groupIds);
 
         return groupIds;
 
