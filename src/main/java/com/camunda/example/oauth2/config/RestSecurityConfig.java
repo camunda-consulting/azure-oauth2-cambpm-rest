@@ -4,7 +4,6 @@ import com.azure.spring.aad.webapi.AADResourceServerWebSecurityConfigurerAdapter
 import com.camunda.example.oauth2.filter.RestAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,10 +11,12 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
+
+import static org.springframework.boot.autoconfigure.security.SecurityProperties.BASIC_AUTH_ORDER;
+import static org.springframework.security.config.http.SessionCreationPolicy.NEVER;
 
 @Configuration
-@Order(SecurityProperties.BASIC_AUTH_ORDER - 20)
+@Order(BASIC_AUTH_ORDER - 20)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class RestSecurityConfig extends AADResourceServerWebSecurityConfigurerAdapter {
@@ -29,7 +30,7 @@ public class RestSecurityConfig extends AADResourceServerWebSecurityConfigurerAd
 
         super.configure(http);
         http.csrf().disable();
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER);
+        http.sessionManagement().sessionCreationPolicy(NEVER);
         http.authorizeRequests().antMatchers("/rest/**", "/engine-rest/**").authenticated();
 
     }

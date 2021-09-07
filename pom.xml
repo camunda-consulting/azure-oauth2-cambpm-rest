@@ -10,22 +10,11 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <!-- ================ CAMUNDA VERSIONS ================ -->
-
-        <!-- Community Edition -->
         <camunda.version>7.15.0</camunda.version>
-
-        <!-- Enterprise Edition -->
-        <!--        <camunda.version>7.15.0-ee</camunda.version>-->
-
-        <!-- ============== SPRING BOOT VERSIONS ============== -->
-
         <spring-boot.version>2.5.4</spring-boot.version>
-
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <version.java>1.8</version.java>
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <azure.version>3.8.0</azure.version>
@@ -58,20 +47,10 @@
     </dependencyManagement>
 
     <dependencies>
-
-        <!-- ================ CAMUNDA ================ -->
-
         <dependency>
             <groupId>org.camunda.bpm.springboot</groupId>
             <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
         </dependency>
-
-        <!-- ================ general - data ================ -->
-
-        <!--        <dependency>-->
-        <!--            <groupId>com.h2database</groupId>-->
-        <!--            <artifactId>h2</artifactId>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
@@ -80,22 +59,14 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
-
-        <!-- ================ spring boot ================ -->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
-
-        <!-- ================ microsoft azure ================ -->
-
-        <!-- https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/spring/azure-spring-boot-starter-active-directory#accessing-a-resource-server -->
         <dependency>
             <groupId>com.azure.spring</groupId>
             <artifactId>azure-spring-boot-starter-active-directory</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -117,5 +88,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
